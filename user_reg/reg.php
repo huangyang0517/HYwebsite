@@ -1,36 +1,36 @@
 <?php
 if(!isset($_POST['submit'])){
-	exit('非法访问!');
+	exit('路脟路篓路脙脦脢!');
 }
 $username = $_POST['username'];
 $password = $_POST['password'];
 $email = $_POST['email'];
-//注册信息判断
+//脳垄虏谩脨脜脧垄脜脨露脧
 if(!preg_match('/^[\w\x80-\xff]{3,15}$/', $username)){
-	exit('错误：用户名不符合规定。<a href="javascript:history.back(-1);">返回</a>');
+	exit('麓铆脦贸拢潞脫脙禄搂脙没虏禄路没潞脧鹿忙露篓隆拢<a href="javascript:history.back(-1);">路碌禄脴</a>');
 }
 if(strlen($password) < 6){
-	exit('错误：密码长度不符合规定。<a href="javascript:history.back(-1);">返回</a>');
+	exit('麓铆脦贸拢潞脙脺脗毛鲁陇露脠虏禄路没潞脧鹿忙露篓隆拢<a href="javascript:history.back(-1);">路碌禄脴</a>');
 }
 if(!preg_match('/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/', $email)){
-	exit('错误：电子邮箱格式错误。<a href="javascript:history.back(-1);">返回</a>');
+	exit('麓铆脦贸拢潞碌莽脳脫脫脢脧盲赂帽脢陆麓铆脦贸隆拢<a href="javascript:history.back(-1);">路碌禄脴</a>');
 }
-//包含数据库连接文件
+//掳眉潞卢脢媒戮脻驴芒脕卢陆脫脦脛录镁
 include('conn.php');
-//检测用户名是否已经存在
-$check_query = mysql_query("select uid from user where username='$username' limit 1");
+//录矛虏芒脫脙禄搂脙没脢脟路帽脪脩戮颅麓忙脭脷
+$check_query = mysql_query("select uid from Users where username='$username' limit 1");
 if(mysql_fetch_array($check_query)){
-	echo '错误：用户名 ',$username,' 已存在。<a href="javascript:history.back(-1);">返回</a>';
+	echo '麓铆脦贸拢潞脫脙禄搂脙没 ',$username,' 脪脩麓忙脭脷隆拢<a href="javascript:history.back(-1);">路碌禄脴</a>';
 	exit;
 }
-//写入数据
+//脨麓脠毛脢媒戮脻
 $password = MD5($password);
 $regdate = time();
-$sql = "INSERT INTO user(username,password,email,regdate)VALUES('$username','$password','$email',$regdate)";
+$sql = "INSERT INTO Users(username,password,email,regdate)VALUES('$username','$password','$email',$regdate)";
 if(mysql_query($sql,$conn)){
-	exit('用户注册成功！点击此处 <a href="login.html">登录</a>');
+	exit('脫脙禄搂脳垄虏谩鲁脡鹿娄拢隆碌茫禄梅麓脣麓娄 <a href="login.html">碌脟脗录</a>');
 } else {
-	echo '抱歉！添加数据失败：',mysql_error(),'<br />';
-	echo '点击此处 <a href="javascript:history.back(-1);">返回</a> 重试';
+	echo '卤搂脟赂拢隆脤铆录脫脢媒戮脻脢搂掳脺拢潞',mysql_error(),'<br />';
+	echo '碌茫禄梅麓脣麓娄 <a href="javascript:history.back(-1);">路碌禄脴</a> 脰脴脢脭';
 }
 ?>
